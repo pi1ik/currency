@@ -13,7 +13,7 @@ export default function ModalForm({ submitFn }: ModalFormProps) {
   const socketRef = React.useRef<WebSocket | null>(null);
 
   React.useEffect(() => {
-    const socket = new WebSocket("ws://echo.websocket.events");
+    const socket = new WebSocket("wss://echo.websocket.events");
     socketRef.current = socket;
 
     socket.onopen = () => {
@@ -141,3 +141,4 @@ export default function ModalForm({ submitFn }: ModalFormProps) {
     </form>
   );
 }
+
