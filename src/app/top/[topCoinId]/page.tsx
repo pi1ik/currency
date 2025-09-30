@@ -10,7 +10,9 @@ async function getTopCoin(params: Promise<{ topCoinId: string }>) {
     { cache: "no-store" }
   );
   const topCoin: ISingleCoin = await fetchedCoin.json();
-  const date = new Date().toLocaleString("ru-RU");
+  const date = new Date().toLocaleString("ru-RU", {
+    timeZone: "Europe/Moscow",
+  });
 
   return { topCoin, date };
 }

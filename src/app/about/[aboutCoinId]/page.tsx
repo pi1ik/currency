@@ -13,7 +13,9 @@ async function getAboutCoin(params: Promise<{ aboutCoinId: string }>) {
     `https://api.coingecko.com/api/v3/coins/${coinId}`
   );
   const aboutCoin: ISingleCoin = await fetchedCoin.json();
-  const date = new Date().toLocaleString();
+  const date = new Date().toLocaleString("ru-RU", {
+    timeZone: "Europe/Moscow",
+  });
 
   return { aboutCoin, date };
 }

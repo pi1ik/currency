@@ -11,7 +11,9 @@ export default async function Trends() {
   const { coins: trendingCoins, nfts: trendingNfts }: ITrending =
     await res.json();
 
-  const date = new Date().toLocaleString("ru-RU");
+  const date = new Date().toLocaleString("ru-RU", {
+    timeZone: "Europe/Moscow",
+  });
 
   const infoTitle: string = "Эта страница использует ISR";
   const infoDescr = `Здесь отображены данные о самых популярных токенах и NFT-коллекциях за последние 24 часа. Страница ревалидируется раз в 30 минут(для удобства проверки механизма). Если с времени последнего обновления, указанного ниже прошло более 30 минут, обновите страницу, свежие данные уже подгружены`;

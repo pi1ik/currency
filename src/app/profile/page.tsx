@@ -52,7 +52,7 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(fetchMarketCoinsList());
-    setDate(new Date().toLocaleString("ru-RU"));
+    setDate(new Date().toLocaleString("ru-RU", { timeZone: "Europe/Moscow" }));
     const storageFavs = window.localStorage.getItem("favorites");
     if (storageFavs) setFavorites(JSON.parse(storageFavs));
   }, [dispatch]);
