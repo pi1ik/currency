@@ -3,7 +3,7 @@ import { ITrending } from "../_types/types";
 import TrendingCard from "../_components/TrendingCard";
 import InfoCard from "../_components/InfoCard";
 
-export const revalidate = 1800; // 30 минут
+export const revalidate = 300; // 5 минут
 
 export default async function Trends() {
   const res = await fetch("https://api.coingecko.com/api/v3/search/trending");
@@ -40,3 +40,4 @@ export default async function Trends() {
     </div>
   );
 }
+
