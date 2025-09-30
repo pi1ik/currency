@@ -2,38 +2,17 @@ import Image from "next/image";
 import React from "react";
 
 type ModalFormProps = {
-  submitFn?: (event: React.FormEvent<HTMLFormElement>) => void;
+  submitFn: (
+    event: React.FormEvent<HTMLFormElement>,
+    msg: string,
+    file: File | null
+  ) => void;
 };
 
 export default function ModalForm({ submitFn }: ModalFormProps) {
   const [msg, setMsg] = React.useState("");
   const [file, setFile] = React.useState<File | null>(null);
   const [filePreview, setFilePreview] = React.useState<string | null>(null);
-
-  const socketRef = React.useRef<WebSocket | null>(null);
-
-  React.useEffect(() => {
-    const socket = new WebSocket("wss://echo.websocket.events");
-    socketRef.current = socket;
-
-    socket.onopen = () => {
-      console.log("WebSocket открыт");
-    };
-
-    socket.onmessage = (event) => {
-      console.log("Получено:", event.data);
-    };
-
-    socket.onerror = (err) => {
-      console.error("Ошибка сокета:", err);
-    };
-
-    socket.onclose = () => {
-      console.log("WebSocket закрыт");
-    };
-
-    return () => socket.close();
-  }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files?.length && e.currentTarget.files?.length > 0) {
@@ -55,24 +34,7 @@ export default function ModalForm({ submitFn }: ModalFormProps) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // Отправляем текст
-    if (msg && socketRef.current?.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({ type: "text", data: msg }));
-    }
-
-    // Отправляем файл
-    if (file && socketRef.current?.readyState === WebSocket.OPEN) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        socketRef.current?.send(
-          JSON.stringify({ type: "file", name: file.name, data: reader.result })
-        );
-      };
-      reader.readAsDataURL(file);
-    }
-
-    submitFn?.(e);
+    submitFn(e, msg, file);
     setMsg("");
     clearFile();
   };
@@ -80,7 +42,7 @@ export default function ModalForm({ submitFn }: ModalFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-center gap-3 rounded-full h-15 p-3 w-full shadow-[inset_3px_3px_6px_rgba(0,0,0,0.3),inset_-3px_-3px_6px_rgba(255,255,255,0.07)]"
+      className="flex items-center gap-3 rounded-full h-15 p-3 w-full border-[2px] border-black/20 shadow-custom-3-6"
     >
       <input
         id="msgfile"
@@ -96,24 +58,26 @@ export default function ModalForm({ submitFn }: ModalFormProps) {
         ) : null}
         <label
           htmlFor="msgfile"
-          className="relative p-2 h-full w-15 rounded-full uppercase font-extralight block cursor-pointer shadow-[3px_3px_6px_rgba(0,0,0,0.3),-3px_-3px_6px_rgba(255,255,255,0.07)]"
+          className="relative p-2 h-full w-15 rounded-full uppercase font-extralight block cursor-pointer border-[2px] border-black/20 shadow-[3px_3px_6px_rgba(0,0,0,0.3),-3px_-3px_6px_rgba(255,255,255,0.07)]"
         >
           <Image
             src="/paper_clip.svg"
             alt="прикрепить файл"
-            width={20}
-            height={20}
+            width={10}
+            height={10}
             style={{ width: "100%", height: "100%" }}
           />
         </label>
       </div>
+
       <input
         placeholder="Сообщение"
         name="msg"
         value={msg}
         onChange={(e) => setMsg(e.target.value)}
-        className="h-full w-full mx-3 px-2 focus-visible:outline focus-visible:outline-white/30"
+        className="h-full w-full mx-3 px-3  rounded-full focus-visible:outline focus-visible:outline-white/30"
       />
+
       {filePreview && (
         <div className="relative w-10 h-10 flex-shrink-0">
           <Image
@@ -131,14 +95,14 @@ export default function ModalForm({ submitFn }: ModalFormProps) {
           </button>
         </div>
       )}
+
       <button
         type="submit"
         disabled={!msg && !file}
-        className="px-5 h-full rounded-full uppercase font-extralight block w-fit cursor-pointer shadow-[3px_3px_6px_rgba(0,0,0,0.3),-3px_-3px_6px_rgba(255,255,255,0.07)] disabled:opacity-50"
+        className="px-5 h-full rounded-full uppercase font-extralight block w-fit cursor-pointer border-[2px] border-black/20 shadow-[3px_3px_6px_rgba(0,0,0,0.3),-3px_-3px_6px_rgba(255,255,255,0.07)] disabled:opacity-50"
       >
         Отправить
       </button>
     </form>
   );
 }
-

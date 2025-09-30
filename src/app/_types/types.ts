@@ -4,6 +4,12 @@ interface IPrice {
   usd: number;
 }
 
+interface IPriceDate {
+  eur: string;
+  rub: string;
+  usd: string;
+}
+
 ///----------------------------------
 /// Карточка трендов
 ///----------------------------------
@@ -119,7 +125,7 @@ export interface IMarketCoin {
 /// Страница историческая информация
 ///----------------------------------
 
-export interface IAboutCoin {
+export interface ISingleCoin {
   id: string;
   symbol: string;
   name: string;
@@ -135,6 +141,16 @@ export interface IAboutCoin {
     small: string;
     large: string;
   };
+  market_data: {
+    current_price: IPrice;
+    ath: IPrice;
+    ath_date: IPriceDate;
+    atl: IPrice;
+    atl_date: IPriceDate;
+    market_cap: IPrice;
+    total_volume: IPrice;
+    price_change_percentage_24h: number;
+  };
   genesis_date: string;
   last_updated: string;
 }
@@ -146,7 +162,7 @@ export interface IAboutCoin {
 export type InfoCardProps = {
   title: string;
   description: string;
-  date: string;
+  date?: string;
 };
 
 export type TrendingCardProps = {

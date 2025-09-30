@@ -1,20 +1,16 @@
 import Image from "next/image";
 import { MarketCardProps } from "../_types/types";
-import React from "react";
+import React, { memo } from "react";
 
-export default function MarketCard({
-  coin,
-  isFav,
-  onToggleFav,
-}: MarketCardProps) {
+function MarketCard({ coin, isFav, onToggleFav }: MarketCardProps) {
   return (
-    <div className="flex gap-[20px]  box-border p-5 relative rounded-xl shadow-[7px_7px_15px_rgba(0,0,0,0.25),-7px_-7px_15px_rgba(255,255,255,0.07)]">
+    <div className="flex flex-col items-center sm:flex-row gap-[20px] w-full box-border p-5 relative rounded-xl shadow-[7px_7px_15px_rgba(0,0,0,0.25),-7px_-7px_15px_rgba(255,255,255,0.07)] border-[2px] border-black/20">
       <button
         onClick={() => onToggleFav(coin.id)}
-        className={`absolute right-5 flex justify-center items-center rounded-lg w-[40px] h-[40px] ${
+        className={`absolute cursor-pointer top-5 right-5 flex justify-center items-center border-[2px] border-black/20 rounded-lg w-[40px] h-[40px] ${
           isFav
-            ? "shadow-[inset_3px_3px_8px_rgba(0,0,0,0.3),inset_-2px_-2px_5px_rgba(255,255,255,0.07)]"
-            : "shadow-[2px_2px_5px_rgba(0,0,0,0.3),-3px_-3px_8px_rgba(255,255,255,0.07)]"
+            ? "shadow-custom-3-8-inset"
+            : "shadow-custom-3-8 shadow-custom-3-8-hover"
         }`}
         onMouseEnter={() => {
           if (!isFav) {
@@ -50,7 +46,7 @@ export default function MarketCard({
           />
         )}
       </button>
-      <div className="relative object-contain rounded-full w-1/4 h-fit p-4 shadow-[inset_3px_3px_7px_rgba(0,0,0,0.25),inset_-3px_-3px_7px_rgba(255,255,255,0.07)]">
+      <div className="relative object-contain rounded-full w-1/2 sm:w-1/4 lg:w-1/5 h-fit p-4 border-[2px] border-black/20 shadow-img-wrapper">
         <Image
           src={coin.image}
           alt="изображение токена"
@@ -61,26 +57,22 @@ export default function MarketCard({
             width: "100%",
             position: "static",
             borderRadius: "100%",
-            boxShadow:
-              "3px 3px 8px rgba(0,0,0,0.25), -3px -3px 8px rgba(255,255,255,0.07)",
           }}
+          className="shadow-img border-[2px] border-black/20"
         />
       </div>
-      <div
-        className="text-xl font-extralight"
-        style={{ width: "calc(100% / 4 * 3 - 65px)" }}
-      >
+      <div className="text-xl font-extralight w-full sm:w-2/3">
         <h3>
           {coin.name}{" "}
-          <span className="uppercase text-white/70">{coin.symbol}</span>
-          <span className="text-2xl uppercase font-light text-left ml-[20px]">
+          <span className="uppercase text-white/70">{coin.symbol} </span>
+          <p className="text-2xl uppercase font-light text-left ">
             ${coin.current_price.toLocaleString("en-de")}{" "}
             {coin.price_change_24h > 0 ? (
               <span className="text-green-500">⬆︎</span>
             ) : (
               <span className="text-red-500">⬇</span>
             )}
-          </span>
+          </p>
         </h3>
 
         <div className="mt-[20px]">
@@ -101,3 +93,4 @@ export default function MarketCard({
     </div>
   );
 }
+export default memo(MarketCard);

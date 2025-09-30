@@ -35,7 +35,7 @@ export default function TrendingCard({ cardItem }: TrendingCardProps) {
 
   return (
     <div className="flex flex-col max-h-min gap-[20px] items-center box-border p-8 relative rounded-xl shadow-[7px_7px_15px_rgba(0,0,0,0.25),-7px_-7px_15px_rgba(255,255,255,0.07)]">
-      <div className="relative p-5 sm:p-7 w-2/3 sm:w-full object-contain relative rounded-full shadow-[inset_5px_5px_10px_rgba(0,0,0,0.25),inset_-5px_-5px_10px_rgba(255,255,255,0.07)]">
+      <div className="relative p-5 sm:p-7 w-2/3 sm:w-full object-contain relative rounded-full shadow-[inset_5px_5px_10px_rgba(0,0,0,0.25),inset_-5px_-5px_10px_rgba(255,255,255,0.07)] border-[2px] border-black/20">
         <div className="relative object-contain rounded-full">
           <Image
             src={src}
@@ -50,6 +50,7 @@ export default function TrendingCard({ cardItem }: TrendingCardProps) {
               boxShadow:
                 "3px 3px 8px rgba(0,0,0,0.25), -3px -3px 8px rgba(255,255,255,0.07)",
             }}
+            className="shadow-img border-[2px] border-black/20"
           />
         </div>
       </div>

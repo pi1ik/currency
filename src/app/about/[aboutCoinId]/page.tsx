@@ -1,5 +1,5 @@
 import InfoCard from "@/app/_components/InfoCard";
-import { IAboutCoin } from "@/app/_types/types";
+import { ISingleCoin } from "@/app/_types/types";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ async function getAboutCoin(params: Promise<{ aboutCoinId: string }>) {
   const fetchedCoin = await fetch(
     `https://api.coingecko.com/api/v3/coins/${coinId}`
   );
-  const aboutCoin: IAboutCoin = await fetchedCoin.json();
+  const aboutCoin: ISingleCoin = await fetchedCoin.json();
   const date = new Date().toLocaleString();
 
   return { aboutCoin, date };
@@ -35,18 +35,23 @@ export default async function Post({
       <h1 className="text-3xl uppercase font-extralight text-center mb-7">
         {aboutCoin.name}{" "}
         <span className="text-2xl text-white/70">
-          {"   "}
+          {" "}
           {aboutCoin.symbol.toUpperCase()}
         </span>
       </h1>
-      <div className="w-full flex justify-center mb-7">
-        <div className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 ">
+      <div className="w-full flex justify-center mb-7 ">
+        <div className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 relative p-3 sm:p-4 w-2/3 sm:w-full object-contain relative rounded-full shadow-[inset_5px_5px_10px_rgba(0,0,0,0.25),inset_-5px_-5px_10px_rgba(255,255,255,0.07)]">
           <Image
             src={aboutCoin.image.large}
             alt={aboutCoin.name}
             width={200}
             height={200}
-            style={{ width: "100%" }}
+            style={{
+              width: "100%",
+              borderRadius: "100%",
+              boxShadow:
+                "3px 3px 8px rgba(0,0,0,0.25), -3px -3px 8px rgba(255,255,255,0.07)",
+            }}
           />
         </div>
       </div>

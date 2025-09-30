@@ -3,11 +3,13 @@ import React from "react";
 export default function useModal() {
   const [isShowing, setIsShowing] = React.useState(false);
 
-  const toggle = () => {
+  const toggle = React.useCallback(() => {
     console.log("toggle");
     console.log(!isShowing);
     setIsShowing(!isShowing);
-  };
+  }, [isShowing]);
 
-  return { isShowing, toggle };
+  const isModalShowing = React.useMemo(() => isShowing, [isShowing]);
+
+  return { isModalShowing, toggle };
 }
