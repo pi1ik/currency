@@ -1,23 +1,7 @@
-// import { useAppDispatch, useAppSelector } from "@/store/hooks";
-// import { fetchAllCoinsList } from "@/store/slices/coinsSlice";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 export default function Home() {
-  // const dispatch = useAppDispatch();
-
-  // const { coinsList } = useAppSelector((state) => state.coins);
-
-  // React.useEffect(() => {
-  //   // dispatch(fetchAllCoinsList());
-  //   // fetchCoinsList();
-  // }, []);
-
-  // React.useEffect(() => {
-  //   console.log(coinsList.items);
-  // }, [coinsList]);
-
   const links = [
     { label: "Профиль (CSR)", href: "/profile" },
     { label: "Топ-10(SSR)", href: "/top" },

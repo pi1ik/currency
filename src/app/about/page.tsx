@@ -120,8 +120,8 @@ export default async function AboutCoinsList() {
         <p className="indent-8 font-extralight">
           The history of cryptocurrencies is a story of innovation, freedom, and
           decentralization. From early concepts to global platforms, the
-          industry has evolved rapidly in just a few decades—and it's clear that
-          this is only the beginning.
+          industry has evolved rapidly in just a few decades—and it&apos;s clear
+          that this is only the beginning.
         </p>
       </div>
     </div>
