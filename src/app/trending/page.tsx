@@ -3,10 +3,12 @@ import { ITrending } from "../_types/types";
 import TrendingCard from "../_components/TrendingCard";
 import InfoCard from "../_components/InfoCard";
 
-export const revalidate = 300; // 5 минут
+export const revalidate = 600; // 10 минут
 
 export default async function Trends() {
-  const res = await fetch("https://api.coingecko.com/api/v3/search/trending");
+  const res = await fetch("https://api.coingecko.com/api/v3/search/trending", {
+    next: { revalidate: 600 },
+  });
 
   const { coins: trendingCoins, nfts: trendingNfts }: ITrending =
     await res.json();
@@ -40,4 +42,5 @@ export default async function Trends() {
     </div>
   );
 }
+
 
