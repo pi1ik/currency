@@ -1,29 +1,13 @@
-// import axios from "axios";
-// import { ITopCoin } from "../_types/types";
-
 import Link from "next/link";
 import InfoCard from "../_components/InfoCard";
 import { IMarketCoin } from "../_types/types";
 import Image from "next/image";
-
-// async function getProjects() {
-//   const resBtc = await axios.get(
-//     `https://api.coingecko.com/api/v3/coins/bitcoin`
-//   );
-
-//   const btc: ITopCoin = await resBtc.data;
-
-//   const topCoins = [btc];
-
-//   return topCoins;
-// }
 
 async function getTopCoins() {
   const res = await fetch(
     `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd`
   );
   const coins: IMarketCoin[] = await res.json();
-  // const topCoins = coins;
   const topCoins = coins.filter((item) => {
     if (
       item.id === "bitcoin" ||
@@ -37,7 +21,6 @@ async function getTopCoins() {
       item.id === "stellar" ||
       item.id === "hyperliquid"
     ) {
-      console.log(item.id);
       return true;
     } else return false;
   });
@@ -47,7 +30,6 @@ async function getTopCoins() {
 
 export default async function TopCoinsList() {
   const topCoins = await getTopCoins();
-  console.log(topCoins);
   const infoTitle = "Это список страниц с SSR";
   const infoDescr =
     "Страницы из списка 'Топ-10' используют SSR, перейдите по ссылкам ниже";

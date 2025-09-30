@@ -52,7 +52,7 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(fetchMarketCoinsList());
-    setDate(new Date().toLocaleString());
+    setDate(new Date().toLocaleString("ru-RU"));
     const storageFavs = window.localStorage.getItem("favorites");
     if (storageFavs) setFavorites(JSON.parse(storageFavs));
   }, [dispatch]);
@@ -63,7 +63,7 @@ export default function Profile() {
 
   const favQuantity = useMemo(() => favorites.length, [favorites]);
 
-  // 🔎 Фильтрация и сортировка
+  /// Фильтрация и сортировка
   const filteredAndSortedCoins = useMemo(() => {
     let result = coins;
 

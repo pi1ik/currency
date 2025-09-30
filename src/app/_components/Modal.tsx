@@ -10,7 +10,6 @@ import {
 } from "../_types/types";
 
 function Modal({ show, onCloseButtonClick }: ModalProps) {
-  console.log("render modal");
   const [chatComponents, setChatComponents] = React.useState<
     React.JSX.Element[]
   >([]);

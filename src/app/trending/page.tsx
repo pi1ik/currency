@@ -1,10 +1,9 @@
-import axios from "../../store/axios";
 import React from "react";
 import { ITrending } from "../_types/types";
 import TrendingCard from "../_components/TrendingCard";
 import InfoCard from "../_components/InfoCard";
 
-export const revalidate = 300; // 5 минут
+export const revalidate = 1800; // 30 минут
 
 export default async function Trends() {
   const res = await fetch("https://api.coingecko.com/api/v3/search/trending");
@@ -12,10 +11,10 @@ export default async function Trends() {
   const { coins: trendingCoins, nfts: trendingNfts }: ITrending =
     await res.json();
 
-  const date = new Date().toLocaleString();
+  const date = new Date().toLocaleString("ru-RU");
 
   const infoTitle: string = "Эта страница использует ISR";
-  const infoDescr = `Здесь отображены данные о самых популярных токенах и NFT-коллекциях за последние 24 часа. Если с момента обновления прошло более 24 часов, обновите страницу, свежие данные уже подгружены`;
+  const infoDescr = `Здесь отображены данные о самых популярных токенах и NFT-коллекциях за последние 24 часа. Страница ревалидируется раз в 30 минут(для удобства проверки механизма). Если с времени последнего обновления, указанного ниже прошло более 30 минут, обновите страницу, свежие данные уже подгружены`;
 
   return (
     <div>

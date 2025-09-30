@@ -1,7 +1,5 @@
-// import type { Metadata } from "next";
 import { Metadata } from "next";
 import StoreProvider from "../_contexts/StoreProvider";
-import { UserContextProvider } from "../_contexts/old.userContext/userContextProvider";
 
 export const metadata: Metadata = {
   title: "Профиль",
@@ -14,14 +12,5 @@ export default function ProfileLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <StoreProvider>
-      <UserContextProvider>
-        {/* <a href="/help" className="text-blue-600 underline">
-          Нужна помощь? Layout
-        </a> */}
-        {children}
-      </UserContextProvider>
-    </StoreProvider>
-  );
+  return <StoreProvider>{children}</StoreProvider>;
 }

@@ -7,7 +7,6 @@ async function getAboutCoins() {
   const coins: ICoinListItem[] = await res.json();
   const aboutCoins = coins.filter((item) => {
     if (item.id === "bitcoin" || item.id === "ethereum") {
-      console.log(item.id);
       return true;
     } else return false;
   });
@@ -16,7 +15,6 @@ async function getAboutCoins() {
 }
 
 export default async function AboutCoinsList() {
-  console.log();
   const aboutCoins = await getAboutCoins();
   const infoTitle = "Это список страниц с SSG";
   const infoDescr =

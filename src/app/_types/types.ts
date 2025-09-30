@@ -177,6 +177,19 @@ export type MarketCardProps = {
   key: React.Key;
 };
 
+export type ModalFormProps = {
+  submitFn: (
+    event: React.FormEvent<HTMLFormElement>,
+    msg: string,
+    file: File | null
+  ) => void;
+};
+
+export type ProfileCardProps = {
+  favQuantity: number;
+  toggleModal: () => void;
+};
+
 ///----------------------------------
 /// Провайдер для страницы профиля
 ///----------------------------------

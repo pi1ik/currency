@@ -1,13 +1,6 @@
 import Image from "next/image";
 import React from "react";
-
-type ModalFormProps = {
-  submitFn: (
-    event: React.FormEvent<HTMLFormElement>,
-    msg: string,
-    file: File | null
-  ) => void;
-};
+import { ModalFormProps } from "../_types/types";
 
 export default function ModalForm({ submitFn }: ModalFormProps) {
   const [msg, setMsg] = React.useState("");
