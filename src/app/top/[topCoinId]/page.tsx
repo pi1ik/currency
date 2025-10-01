@@ -24,7 +24,7 @@ export default async function Post({
 }) {
   const { topCoin, date } = await getTopCoin(params);
 
-  const infoTitle = "Эта страница использует SSR.";
+  const infoTitle = "Эта страница использует SSR";
   const infoDescr =
     "Все данные были сгенерированы в момент запроса к серверу, данные обновляются при перезагрузке страницы";
 

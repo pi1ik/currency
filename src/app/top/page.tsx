@@ -32,7 +32,7 @@ export default async function TopCoinsList() {
   const topCoins = await getTopCoins();
   const infoTitle = "Это список страниц с SSR";
   const infoDescr =
-    "Страницы из списка 'Топ-10' используют SSR, перейдите по ссылкам ниже";
+    "Страницы из списка Топ-10 используют SSR, перейдите по ссылкам ниже";
   return (
     <div>
       <InfoCard title={infoTitle} description={infoDescr} />

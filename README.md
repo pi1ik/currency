@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!---------CSR--------->
 
-## Getting Started
+На странице /profile отображается список токенов с основными данными, есть строка поиска и фильтрация.
 
-First, run the development server:
+Кнопка ОНЛАЙН КОНСУЛЬТАЦИЯ: открывает модальное окно с формой. Форма принимает текстовое сообщение и изображение, при отправке осуществляется POST-запрос и сообщение публикуется в чат.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Избранное: добавленные в избранное элементы списка сохраняются в LocalStorage.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Поиск: поиск осуществляется по названию и символу токена.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Фильтрация: по алфавиту или по текущему курсы валюты.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<!---------SSR--------->
 
-## Learn More
+На странице /top отображается список страниц, которые используют SSR.
 
-To learn more about Next.js, take a look at the following resources:
+Страница токена: отображаются основные данные токена, полученные из API.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!---------SSG--------->
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+На странице /about отображается список страниц, которые используют SSG.
 
-## Deploy on Vercel
+Страница токена: отображаются основные статичные данные токена, полученные из API.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<!---------ISR--------->
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+На странице /trending отображается список самых популярных за последние 24 часа NFT-коллекций и токенов, данные загружаются из API, ревалидируются раз в 30 минут.

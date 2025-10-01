@@ -6,7 +6,7 @@ import { IMarketCoin } from "@/app/_types/types";
 export const fetchMarketCoinsList = createAsyncThunk(
   "fetchAllCoinsList",
   async () => {
-    const res = await axios.get("/coins/markets?vs_currency=usd");
+    const res = await axios.get("/coins/markets?vs_currency=usd&per_page=250");
     return res.data as IMarketCoin[];
   }
 );
